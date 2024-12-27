@@ -29,7 +29,15 @@ class MessageHandler {
   async handleTextMessage(incomingMessage, senderInfo) {
     if (this.isGreeting(incomingMessage)) {
       const name = this.getSenderName(senderInfo); // Obtener el nombre desde senderInfo
-      return { message: `Hello, ${name}, cómo te ayudo?`, type: 'text' }; // Personaliza el mensaje con el nombre del usuario
+      return { message: `Hello, ${name}.Soy *Dra. Empaque*, la doc que receta empaques perfectos y cura defectos en bolsitas. 🩺💼
+¿Listo para reducir desperdicios y mantener la operación al 💯?                                                                    *Solucionar un defecto.*
+¿Tienes algún problema con el empaque? Escribe *Defecto* 
+
+*Ver los básicos operativos.*
+Consulta actividades clave para mantener la operación eficiente. Escribe *Básicos* 
+
+*Aprender cómo hacer algo.*
+Encuentra instrucciones para limpieza, ajustes o procedimientos específicos. Escribe *Aprender*`, type: 'text' }; // Personaliza el mensaje con el nombre del usuario
     } else {
       return await getResponseForTrigger(incomingMessage);
     }
