@@ -29,7 +29,8 @@ class MessageHandler {
 async handleTextMessage(incomingMessage, senderInfo) {
   if (this.isGreeting(incomingMessage)) {
     const name = this.getSenderName(senderInfo); // Obtener el nombre desde senderInfo
-    return { message: `Hola, ${name}.Soy *Dra. Empaque*, la doc que receta empaques perfectos y cura defectos en bolsitas. 🩺💼
+    return { message: `Hola, ${name}.
+Soy *Dra. Empaque*, la doc que receta empaques perfectos y cura defectos en bolsitas. 🩺💼
 ¿Listo para reducir desperdicios y mantener la operación al 💯?  
 
 *Solucionar un defecto.*🔧💼🛠
