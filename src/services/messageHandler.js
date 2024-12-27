@@ -30,7 +30,8 @@ class MessageHandler {
     if (this.isGreeting(incomingMessage)) {
       const name = this.getSenderName(senderInfo); // Obtener el nombre desde senderInfo
       return { message: `Hello, ${name}.Soy *Dra. Empaque*, la doc que receta empaques perfectos y cura defectos en bolsitas. 🩺💼
-¿Listo para reducir desperdicios y mantener la operación al 💯?                                                                    *Solucionar un defecto.*
+¿Listo para reducir desperdicios y mantener la operación al 💯?                                                                   
+*Solucionar un defecto.*
 ¿Tienes algún problema con el empaque? Escribe *Defecto* 
 
 *Ver los básicos operativos.*
