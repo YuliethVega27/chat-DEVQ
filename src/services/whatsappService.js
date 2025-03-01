@@ -2,27 +2,48 @@ import axios from 'axios';
 import config from '../config/env.js';
 
 class WhatsAppService {
-  async sendMessage(to, body, messageId) {
+  class WhatsAppService {
+  async sendMessage(to, body, messageId = null) {
     try {
-      await axios({
+      // ✅ Validar que `to` y `body` no estén vacíos
+      if (!to || !body) {
+        console.error('🚨 Error: "to" y "body" son obligatorios.');
+        return;
+      }
+
+      // ✅ Formatear el número de teléfono correctamente
+      const cleanTo = to.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+      console.log("📞 Enviando mensaje a:", cleanTo);
+
+      // ✅ Definir el objeto de datos para la API
+      const data = {
+        messaging_product: 'whatsapp',
+        to: cleanTo,
+        type: 'text',
+        text: { body }
+      };
+
+      if (messageId) {
+        data.context = { message_id: messageId };  // Si hay un mensaje previo, responder en contexto
+      }
+
+      // ✅ Enviar solicitud a la API de WhatsApp
+      const response = await axios({
         method: 'POST',
         url: `https://graph.facebook.com/${config.API_VERSION}/${config.BUSINESS_PHONE}/messages`,
         headers: {
           Authorization: `Bearer ${config.API_TOKEN}`,
+          "Content-Type": "application/json"
         },
-        data: {
-          messaging_product: 'whatsapp',
-          to,
-          text: { body },
-          //context: {
-            //message_id: messageId,
-          //},
-        },
+        data: data
       });
+
+      console.log('✅ Mensaje enviado con éxito:', response.data);
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error('❌ Error enviando mensaje:', error.response ? error.response.data : error.message);
     }
   }
+}
   async markAsRead(messageId) {
     try {
       await axios({
